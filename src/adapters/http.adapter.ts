@@ -15,13 +15,11 @@ export class AxiosAdapter implements IHttpAdapter {
 
     async get<T>(url: string): Promise<T> {
         const { data } = await this.axios.get<T>(url);
-        console.log('con axios');
         return data;
     }
 
     async post<T, E>(url: string, form: E): Promise<T> {
         const { data } = await this.axios.post<T>(url, form);
-        console.log('con axios');
         return data;
     }
 
