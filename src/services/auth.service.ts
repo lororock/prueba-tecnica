@@ -12,5 +12,8 @@ export class AuthService {
     public async registrar(usuario:any): Promise<any> {
         return await this.http.post(API_BASE_URL + "/auth/register", usuario)
     }
+    public async login(authBody:any): Promise<any> {
+        return await this.http.post(API_BASE_URL + "/auth/login", authBody)
+    }
 
 }

@@ -56,7 +56,7 @@ console.log(result);
   <div class="card">
     <button @click="registro()">Registrarme</button>
   </div>
-  <a>Ya tengo cuenta</a>
+  <RouterLink to="/login">Ya tengo cuenta</RouterLink>
 </template>
 
 <style scoped>

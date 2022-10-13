@@ -1,4 +1,17 @@
 <script setup lang="ts">
+import { ref, onMounted } from "@vue/runtime-core";
+import { AuthService } from "../services/auth.service"
+
+const auth = new AuthService();
+const usuario = {
+  userinfo:'', passWord:''
+};
+const login = async ()=>{
+  const result = await auth.login(usuario)
+}
+onMounted(async () => {
+  auth.login
+});
 
 </script>
 
@@ -10,18 +23,21 @@
   <h1>login</h1>
 
   <div>
-    <input type="email" placeholder="Correo" />
+    <input type="text" placeholder="Nombre De Usuario" v-model="usuario.userinfo"/>
   </div>
   <div>
-    <input type="password" placeholder="Contraseña" />
+    <input type="password" placeholder="Contraseña" v-model="usuario.passWord" />
   </div>
   <div class="card">
-    <button>Iniciar sesión</button>
+    <button @click="login()">Iniciar sesión</button>
   </div>
-  <a>Registrarme</a>
+  <RouterLink to="/registro">Registrarme</RouterLink>
 </template>
 
 <style scoped>
+li{
+  
+}
 .arena {
   width: 300px;
   height: 300px;
