@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+
 import Registro from "../views/Registro.vue"
 import Usuario from '../views/Usuario.vue'
 import Login from '../views/Login.vue'
@@ -10,6 +11,9 @@ const router = createRouter({
       path: "/",
       name: 'user',
       component: Usuario,
+      meta: {
+        requiredAuth: true
+      }
     },
     {
       path: "/login",
@@ -24,5 +28,14 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach(async (to, from) => {
+  if (
+    to.matched.some((route) => route.meta.requiredAuth)
+  ) {
+    if (!localStorage.getItem('token')) {
+      return { name: 'login' }
+    }
+  }
+})
 
 export default router;

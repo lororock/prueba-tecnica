@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import { ref, onMounted } from "@vue/runtime-core";
-import { AuthService } from "../services/auth.service"
-import { useAuthStore } from "../store/auth"
+import router from "../router";
+import { AuthService } from "../services/auth.service";
+import { useAuthStore } from "../store/auth";
 
-const auth = new AuthService();
-const usuario = {
-  userinfo:'', passWord:''
-};
-const store = useAuthStore();
-const login = async ()=>{
-  const result = await auth.login(usuario)
-  store.saveToken(result.token)
-}
-onMounted(async () => {
-  auth.login
+const authService = new AuthService();
+const authStore = useAuthStore();
+
+const usuario = ref({
+  userinfo: "",
+  passWord: "",
 });
 
+const login = async () => {
+  const result = await authService.login(usuario.value);
+  authStore.saveToken("13231223fjajsd");
+  router.push("/");
+};
 </script>
 
 <template>
@@ -24,12 +25,19 @@ onMounted(async () => {
   </div>
 
   <h1>login</h1>
-
   <div>
-    <input type="text" placeholder="Nombre De Usuario" v-model="usuario.userinfo"/>
+    <input
+      type="text"
+      placeholder="Nombre De Usuario"
+      v-model="usuario.userinfo"
+    />
   </div>
   <div>
-    <input type="password" placeholder="Contraseña" v-model="usuario.passWord" />
+    <input
+      type="password"
+      placeholder="Contraseña"
+      v-model="usuario.passWord"
+    />
   </div>
   <div class="card">
     <button @click="login()">Iniciar sesión</button>

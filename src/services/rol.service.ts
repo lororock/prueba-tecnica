@@ -10,7 +10,7 @@ export class RolService {
     }
 
     public async listarRoles(): Promise<any> {
-        return await this.http.get(API_BASE_URL + "/rol/all")
+        return await this.http.get("http://localhost:3000/rol/all")
     }
 
     public async listarTiposDocumentos(): Promise<any> {
