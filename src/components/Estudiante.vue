@@ -1,27 +1,32 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>Nombre del estudiante</h1>
-    <input type="text" name="" placeholder="Nombre De Profesor">
-  </div>
-  <div>
-    <input type="text" placeholder="Tarea Por Realizar">
-  </div>
-  <h3>Descripción</h3>
-  <div>
-    <textarea class="inp-area"></textarea>
-  </div>
-  <h3>Solución</h3>
-  <div>
-    <textarea class="inp-area"></textarea>
-  </div>
-  <button>Enviar</button>
+  <!--imprime nombre del estudiante-->
+  <h1>Nombre del estudiante</h1>
 
+  <!--inicio de formulario-->
+  <form action="">
+
+    <input type="text" name="" placeholder="Nombre De Profesor" />
+    <div>
+      <input type="text" placeholder="Tarea Por Realizar" />
+    </div>
+    <h3>Descripción</h3>
+    <div>
+      <textarea class="inp-area"></textarea>
+    </div>
+    <h3>Solución</h3>
+    <div>
+      <textarea class="inp-area"></textarea>
+    </div>
+    
+  </form>
+
+  <!--envía formulario-->
+  <button>Enviar</button>
 </template>
 
 <style scoped>
-
 input {
   color: #fff;
   background-color: #c8960c;
@@ -47,7 +52,7 @@ select {
   border: none;
 }
 
-.inp-area{
+.inp-area {
   color: #fff;
   background-color: #c8960c;
   padding: 20px 20px 20px 20px;
@@ -60,4 +65,3 @@ select {
   background-color: #ffffff;
 }
 </style>
-

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "@vue/runtime-core";
+import { ref, } from "@vue/runtime-core";
 import router from "../router";
 import { AuthService } from "../services/auth.service";
 import { useAuthStore } from "../store/auth";
@@ -20,28 +20,37 @@ const login = async () => {
 </script>
 
 <template>
+  <!-- imagen de login-->
   <div>
     <img class="arena" src="../assets/ArenaCenter.png" />
   </div>
 
   <h1>login</h1>
-  <div>
-    <input
-      type="text"
-      placeholder="Nombre De Usuario"
-      v-model="usuario.userinfo"
-    />
-  </div>
-  <div>
-    <input
-      type="password"
-      placeholder="Contraseña"
-      v-model="usuario.passWord"
-    />
-  </div>
+
+  <!--inicio de formulario-->
+  <form action="">
+    <div>
+      <input
+        type="text"
+        placeholder="Nombre De Usuario"
+        v-model="usuario.userinfo"
+      />
+    </div>
+    <div>
+      <input
+        type="password"
+        placeholder="Contraseña"
+        v-model="usuario.passWord"
+      />
+    </div>
+  </form>
+
+  <!--envía formulario-->
   <div class="card">
     <button @click="login()">Iniciar sesión</button>
   </div>
+
+  <!--redirige al registro-->
   <RouterLink to="/registro">Registrarme</RouterLink>
 </template>
 

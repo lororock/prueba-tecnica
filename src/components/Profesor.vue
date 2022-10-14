@@ -1,25 +1,26 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>nombre profesor</h1>
-  </div>
-  <div>
-    Calificación: <input type="number">
-  </div>
-  <p>Observación: </p>
-  <div>
-    <textarea class="inp-area"></textarea>
-  </div>
-  
-  <button> Enviar </button>
+  <!--imprime nombre del profesor-->
+  <h1>nombre profesor</h1>
 
+  <!--inicio de formulario-->
+  <form action="">
+
+    <div><label for="">Calificacion:</label> <input type="number" /></div>
+    <p>Observación:</p>
+    <div>
+      <textarea class="inp-area"></textarea>
+    </div>
+    
+  </form>
+
+  <!--envía formulario-->
+  <button>Enviar</button>
 </template>
 
 <style scoped>
-.inp-area{
+.inp-area {
   color: #fff;
   background-color: #c8960c;
   padding: 20px 20px 20px 20px;
