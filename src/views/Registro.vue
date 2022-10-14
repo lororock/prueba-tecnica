@@ -1,32 +1,50 @@
 <script setup lang="ts">
 import { RolService } from "../services/rol.service";
-import { ref, onMounted } from "@vue/runtime-core";
+import { ref, onMounted, reactive } from "@vue/runtime-core";
 import { AuthService } from "../services/auth.service";
+import { UserRegisterDto } from "../dto/user-register.dto";
 
 const http = new RolService();
 const roles = ref<any>([]);
 const tiposDoc = ref<any>([]);
-onMounted(async () => {
-  roles.value = await http.listarRoles();
-  tiposDoc.value = await http.listarTiposDocumentos();
-});
 
-const usuario = {
+const usuario = ref<UserRegisterDto>({
   rol: "SELECCIONE SU ROL",
   name: "",
   email: "",
   username: "",
   passWord: "",
   tipe_document: "TIPO DE DOCUMENTO",
-  document: "",
-  phone: null,
+  document: 0,
+  phone: 0,
+});
+
+const validarDatosUsuario = () => {
+  if (
+    !usuario.value.rol ||
+    !usuario.value.name ||
+    !usuario.value.email ||
+    !usuario.value.username ||
+    !usuario.value.passWord ||
+    !usuario.value.tipe_document ||
+    usuario.value.document < 1 ||
+    usuario.value.phone < 1
+  )
+    return false;
+  return true;
 };
+
 const registro = async () => {
   const authService = new AuthService();
   const result = await authService.registrar(usuario);
   // authService.registrar(usuario);
   console.log(result);
 };
+
+onMounted(async () => {
+  roles.value = await http.listarRoles();
+  tiposDoc.value = await http.listarTiposDocumentos();
+});
 </script>
 
 <template>
@@ -36,7 +54,6 @@ const registro = async () => {
   </div>
   <!--inicio de formulario-->
   <form action="">
-    
     <div class="card">
       <select v-model="usuario.rol">
         <option selected disabled>SELECCIONE SU ROL</option>
@@ -78,9 +95,11 @@ const registro = async () => {
 
   <!--envía formulario-->
   <div class="card">
-    <button @click="registro()">Registrarme</button>
+    <button :disabled="!validarDatosUsuario" @click="registro()">
+      Registrarme
+    </button>
   </div>
-  
+
   <!--redirige a login-->
   <RouterLink to="/login">Ya tengo cuenta</RouterLink>
 </template>

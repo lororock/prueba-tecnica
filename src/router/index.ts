@@ -32,7 +32,7 @@ router.beforeEach(async (to, from) => {
   if (
     to.matched.some((route) => route.meta.requiredAuth)
   ) {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token') || !localStorage.getItem("_id")) {
       return { name: 'login' }
     }
   }

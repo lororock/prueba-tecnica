@@ -6,13 +6,11 @@
 
   <!--inicio de formulario-->
   <form action="">
-
     <div><label for="">Calificacion:</label> <input type="number" /></div>
     <p>Observación:</p>
     <div>
       <textarea class="inp-area"></textarea>
     </div>
-    
   </form>
 
   <!--envía formulario-->
