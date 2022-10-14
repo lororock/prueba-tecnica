@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from "@vue/runtime-core";
 import { AuthService } from "../services/auth.service"
+import { useAuthStore } from "../store/auth"
 
 const auth = new AuthService();
 const usuario = {
   userinfo:'', passWord:''
 };
+const store = useAuthStore();
 const login = async ()=>{
   const result = await auth.login(usuario)
+  store.saveToken(result.token)
 }
 onMounted(async () => {
   auth.login
@@ -35,9 +38,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-li{
-  
-}
 .arena {
   width: 300px;
   height: 300px;
