@@ -14,7 +14,7 @@ const usuario = ref({
 
 const login = async () => {
   const result = await authService.login(usuario.value);
-  authStore.saveToken("13231223fjajsd");
+  authStore.saveToken(result.token);
   router.push("/");
 };
 </script>
