@@ -3,6 +3,10 @@ import { RolService } from "../services/rol.service";
 import { onMounted, ref, watch } from "@vue/runtime-core";
 import { useAuthStore } from "../store/auth";
 import router from "../router";
+import estudiante from "../components/Estudiante.vue";
+import profesor from "../components/Profesor.vue";
+
+
 
 const authStore = useAuthStore();
 
@@ -20,10 +24,19 @@ onMounted(async () => {
 </script>
 
 <template>
+  <button @click="logout()">Cerrar sesión</button>
   <div>
-    <select>
-      <option v-for="role in roles" :key="role._id">{{ role.name }}</option>
-    </select>
+    <estudiante />
+  </div >
+  <div>
+    <profesor />
   </div>
-  <button @click="logout()">Cerrar Sesión</button>
 </template>
+
+<style scoped>
+button{
+  background-color: rgb(142, 14, 14);
+  
+}
+</style>
+
