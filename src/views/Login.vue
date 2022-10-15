@@ -12,6 +12,8 @@ const usuario = ref({
   passWord: "",
 });
 
+
+//  genera token para inicio de sesion
 const login = async () => {
   try {
     const result = await authService.login(usuario.value);

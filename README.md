@@ -1,3 +1,12 @@
+## Nota: para ejecutar aplicacion cambiar URL con nombre(API_BASE_URL) de Servidor del baken en la ruta src/config/index.ts
+
+## ejecutar npm run dev para iniciar servidor de pruebas 
+## ejecutar npm run build para construir la aplicacion 
+
+## ejecutar npm run preview para visualizar la aplicacion contruida
+
+
+
 # Vue 3 + TypeScript + Vite
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.

@@ -18,11 +18,13 @@ const roles = ref<any>([]);
 const tipoDocumentos = ref<any>([]);
 const datosUsuario = ref<Partial<UserRegisterDto>>({});
 
+// envia a login despues de registro exitoso
 const logout = () => {
   authStore.logoutUser();
   router.push("/login");
 };
 
+// recupera datos de roles y documentos
 onMounted(async () => {
   authStore.reloadUserData();
   datosUsuario.value = await httpUser.getDatosUsuario(
@@ -35,10 +37,15 @@ onMounted(async () => {
 </script>
 
 <template>
+  <!--cierra sesion-->
   <button @click="logout()">Cerrar sesión</button>
+
+  <!--imprime nombre de usuario-->
   <h1>
     {{ datosUsuario.name }}
   </h1>
+
+  <!--trae los componentes-->
   <Estudiante v-if="datosUsuario.rol === '6341b509ee0c46a68e80fec1'" />
   <Profesor v-if="datosUsuario.rol === '6341b4f9ee0c46a68e80fec0'" />
 </template>

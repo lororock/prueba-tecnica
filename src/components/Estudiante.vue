@@ -54,17 +54,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <!--imprime nombre del estudiante-->
-    <h1></h1>
-    <!--inicio de formulario-->
-    <select v-model="nuevaTarea.professorId">
-      <option selected disabled>Seleccione Profesor</option>
-      <option v-for="profe in profes" :key="profe.username" :value="profe._id">
-        {{ profe.name }}
-      </option>
-    </select>
-  </div>
+  <!--inicio de formulario-->
+  <select v-model="nuevaTarea.professorId">
+    <option selected disabled>Seleccione Profesor</option>
+    <option v-for="profe in profes" :key="profe.username" :value="profe._id">
+      {{ profe.name }}
+    </option>
+  </select>
   <div>
     <input
       v-model="nuevaTarea.name"

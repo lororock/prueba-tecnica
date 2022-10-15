@@ -38,11 +38,11 @@ const validarDatosUsuario = () => {
   return true;
 };
 
+// registra un nuevo usuario
 const registro = async () => {
   try {
     const authService = new AuthService();
-    const result = await authService.registrar(usuario.value);
-    authStore.saveDatauser(result.token, result._id);
+    await authService.registrar(usuario.value);
     router.push("/login");
     alert("Registro exitoso");
   } catch (error) {
@@ -50,6 +50,7 @@ const registro = async () => {
   }
 };
 
+// trae roles y tipos de datos desde la base de datos
 onMounted(async () => {
   roles.value = await http.listarRoles();
   tiposDoc.value = await http.listarTiposDocumentos();
