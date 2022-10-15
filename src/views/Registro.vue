@@ -19,8 +19,8 @@ const usuario = ref<UserRegisterDto>({
   username: "",
   passWord: "",
   tipe_document: "TIPO DE DOCUMENTO",
-  document: 0,
-  phone: 0,
+  document: null,
+  phone: null,
 });
 
 const validarDatosUsuario = () => {
@@ -31,8 +31,8 @@ const validarDatosUsuario = () => {
     !usuario.value.username ||
     !usuario.value.passWord ||
     !usuario.value.tipe_document ||
-    usuario.value.document < 1 ||
-    usuario.value.phone < 1
+    !usuario.value.document ||
+    !usuario.value.phone
   )
     return false;
   return true;
