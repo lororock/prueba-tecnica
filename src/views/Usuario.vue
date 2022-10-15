@@ -3,10 +3,11 @@ import { RolService } from "../services/rol.service";
 import { onMounted, ref, watch } from "@vue/runtime-core";
 import { useAuthStore } from "../store/auth";
 import router from "../router";
-import Estudiante from "../components/Estudiante.vue";
-import Profesor from "../components/Profesor.vue";
 import { UserService } from "../services/user.service";
 import { UserRegisterDto } from "../dto/user-register.dto";
+
+import Estudiante from "/src/components/Estudiante.vue";
+import Profesor from "/src/components/Profesor.vue";
 
 const authStore = useAuthStore();
 
@@ -35,8 +36,8 @@ onMounted(async () => {
    <h1>
      {{datosUsuario.name}}
    </h1>
-  <Estudiante key="1" v-if="datosUsuario.rol === '6341b509ee0c46a68e80fec1'"/>
-  <Profesor key="2"  v-if="datosUsuario.rol === '6341b4f9ee0c46a68e80fec0'"/>
+  <Estudiante v-if="datosUsuario.rol === '6341b509ee0c46a68e80fec1'"/>
+  <Profesor v-if="datosUsuario.rol === '6341b4f9ee0c46a68e80fec0'"/>
 </template>
 
 <style scoped>
