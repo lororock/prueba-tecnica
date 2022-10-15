@@ -5,13 +5,17 @@ import { useAuthStore } from "../store/auth";
 import router from "../router";
 import Estudiante from "../components/Estudiante.vue";
 import Profesor from "../components/Profesor.vue";
+import { UserService } from "../services/user.service";
+import { UserRegisterDto } from "../dto/user-register.dto";
 
 const authStore = useAuthStore();
 
 const http = new RolService();
+const httpUser = new UserService()
 
 const roles = ref<any>([]);
 const tipoDocumentos = ref<any>([]);
+const datosUsuario = ref<Partial<UserRegisterDto>>({})
 
 const logout = () => {
   authStore.logoutUser();
@@ -19,16 +23,17 @@ const logout = () => {
 };
 
 onMounted(async () => {
+  authStore.reloadUserData();
+  datosUsuario.value = await httpUser.getDatosUsuario(authStore.idUser || '', authStore.token || '')
   roles.value = await http.listarRoles();
   tipoDocumentos.value = await http.listarTiposDocumentos();
-  authStore.reloadUserData();
 });
 </script>
 
 <template>
   <button @click="logout()">Cerrar sesión</button>
-  <Estudiante />
-  <Profesor />
+  <Estudiante  v-if="datosUsuario.rol === '6341b509ee0c46a68e80fec1'"/>
+  <Profesor v-if="datosUsuario.rol === '6341b4f9ee0c46a68e80fec0'"/>
 </template>
 
 <style scoped>

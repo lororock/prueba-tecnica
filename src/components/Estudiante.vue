@@ -11,7 +11,7 @@ const authStore = useAuthStore();
 const nuevaTarea = reactive<Tarea>({
   description: "",
   name: "",
-  professorId: "",
+  professorId: "Seleccione Profesor",
   solution: "",
   studentId: "",
 });
@@ -31,6 +31,8 @@ const validarTarea = computed(() => {
     return false;
   return true;
 });
+
+const profesores = computed(() => profes.value.filter((profesor) => profesor.rol === '6341b4f9ee0c46a68e80fec0'))
 
 const crearTarea = async () => {
   await http.crearTarea({...nuevaTarea, studentId: authStore.idUser || ''}, authStore.token || "");
@@ -53,7 +55,7 @@ onMounted(async () => {
     <!--inicio de formulario-->
     <select v-model="nuevaTarea.professorId">
       <option selected disabled>SELECCIONE SU ROL</option>
-        <option v-for="profe in profes" :key="profe._id" :value="profe._id">
+        <option v-for="profe in profesores" :key="profe._id" :value="profe._id">
           {{ profe.name }}
         </option>
     </select>

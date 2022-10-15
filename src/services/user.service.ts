@@ -14,6 +14,10 @@ export class UserService {
         return await this.http.getAuth(API_BASE_URL + "/user/all", { headers: { Authorization: `Bearer ${token}` } })
     }
 
+    public async getDatosUsuario(idUser:string, token: string): Promise<any> {
+        return await this.http.getAuth(API_BASE_URL + "/user/byId/" + idUser, { headers: { Authorization: `Bearer ${token}` } })
+    }
+
     public async getTodosUsuario(data: Tarea, token: string): Promise<any> {
         return await this.http.postAuth(API_BASE_URL + "/task/create", data, { headers: { Authorization: `Bearer ${token}` } })
     }

@@ -1,5 +1,6 @@
 import { AxiosAdapter, IHttpAdapter } from "../adapters/http.adapter";
 import { API_BASE_URL } from '../config'
+import { TareaUpdateDto } from "../dto/taraea-update.dto";
 import { Tarea } from "../dto/tarea.dto";
 
 export class TareaService {
@@ -11,16 +12,14 @@ export class TareaService {
     }
 
     public async crearTarea(data: Tarea, token: string): Promise<any> {
-        return await this.http.postAuth(API_BASE_URL + "/task/create", data, { headers: { Authorization: "Bearer " + token } })
+        return await this.http.postAuth(API_BASE_URL + "/task/create", data, { headers: { Authorization: `Bearer ${token}` } })
     }
 
-    public async actualizarTarea(): Promise<any> {
-        return await this.http.get(API_BASE_URL + "/task/udpate/")
+    public async actualizarTarea(idTarea: string, data: TareaUpdateDto, token: string): Promise<any> {
+        return await this.http.patchAuth(API_BASE_URL + "/task/udpate/"+idTarea, data, { headers: { Authorization: `Bearer ${token}` } } )
     }
 
     public async eliminarTarea(idTarea: string, token: string): Promise<any> {
-        return await this.http.delete(API_BASE_URL + "/tipe-document/all/" + idTarea, { headers: { Authorization: `Bearer ${token}` } })
+        return await this.http.delete(API_BASE_URL + "/task/delete/" + idTarea, { headers: { Authorization: `Bearer ${token}` } })
     }
-
-
 }

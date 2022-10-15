@@ -3,13 +3,17 @@ import { RolService } from "../services/rol.service";
 import { ref, onMounted } from "@vue/runtime-core";
 import { AuthService } from "../services/auth.service";
 import { UserRegisterDto } from "../dto/user-register.dto";
+import router from "../router";
+import { useAuthStore } from "../store/auth";
+
+const authStore = useAuthStore() 
 
 const http = new RolService();
 const roles = ref<any>([]);
 const tiposDoc = ref<any>([]);
 
+
 const usuario = ref<UserRegisterDto>({
-  _id: '',
   rol: "SELECCIONE SU ROL",
   name: "",
   email: "",
@@ -37,9 +41,9 @@ const validarDatosUsuario = () => {
 
 const registro = async () => {
   const authService = new AuthService();
-  const result = await authService.registrar(usuario);
-  // authService.registrar(usuario);
-  console.log(result);
+  const result = await authService.registrar(usuario.value);
+  authStore.saveDatauser(result.token, result.user._id)
+  router.push("/")
 };
 
 onMounted(async () => {
