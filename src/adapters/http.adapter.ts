@@ -6,7 +6,7 @@ export interface IHttpAdapter {
     getAuth<T>(url: string, config: AxiosRequestConfig): Promise<T>;
     post<T, E>(url: string, data: E): Promise<T>;
     postAuth<T, E>(url: string, data: E, config: AxiosRequestConfig): Promise<T>;
-    patchAuth<T, E>(url: string, data: E, config: AxiosRequestConfig): Promise<T>;
+    put<T, E>(url: string, data: E, config: AxiosRequestConfig): Promise<T>;
     delete<T, E>(url: string, config: AxiosRequestConfig): Promise<T>;
 
 }
@@ -35,8 +35,8 @@ export class AxiosAdapter implements IHttpAdapter {
         return data;
     }
 
-    async patchAuth<T, E>(url: string, formData: E, config: AxiosRequestConfig): Promise<T> {
-        const { data } = await this.axios.patch<T>(url, formData, config);
+    async put<T, E>(url: string, formData: E, config: AxiosRequestConfig): Promise<T> {
+        const { data } = await this.axios.put<T>(url, formData, config);
         return data;
     }
 

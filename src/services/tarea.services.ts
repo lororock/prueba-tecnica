@@ -15,8 +15,12 @@ export class TareaService {
         return await this.http.postAuth(API_BASE_URL + "/task/create", data, { headers: { Authorization: `Bearer ${token}` } })
     }
 
+    public async getTareasProfesor(idProfesor:string, token: string): Promise<any> {
+        return await this.http.getAuth(API_BASE_URL + "/task/byProfessor/" + idProfesor,  { headers: { Authorization: `Bearer ${token}` } })
+    }
+
     public async actualizarTarea(idTarea: string, data: TareaUpdateDto, token: string): Promise<any> {
-        return await this.http.patchAuth(API_BASE_URL + "/task/udpate/"+idTarea, data, { headers: { Authorization: `Bearer ${token}` } } )
+        return await this.http.put(API_BASE_URL + "/task/update/" + idTarea, data, { headers: { Authorization: `Bearer ${token}` } } )
     }
 
     public async eliminarTarea(idTarea: string, token: string): Promise<any> {

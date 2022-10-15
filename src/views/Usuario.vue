@@ -32,8 +32,11 @@ onMounted(async () => {
 
 <template>
   <button @click="logout()">Cerrar sesión</button>
-  <Estudiante  v-if="datosUsuario.rol === '6341b509ee0c46a68e80fec1'"/>
-  <Profesor v-if="datosUsuario.rol === '6341b4f9ee0c46a68e80fec0'"/>
+   <h1>
+     {{datosUsuario.name}}
+   </h1>
+  <Estudiante key="1" v-if="datosUsuario.rol === '6341b509ee0c46a68e80fec1'"/>
+  <Profesor key="2"  v-if="datosUsuario.rol === '6341b4f9ee0c46a68e80fec0'"/>
 </template>
 
 <style scoped>

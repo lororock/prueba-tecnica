@@ -19,7 +19,7 @@ const nuevaTarea = reactive<Tarea>({
 const http = new TareaService();
 const httpUsers = new UserService()
 
-const profes = ref<UserRegisterDto[]>([]);
+const profes = ref<any[]>([]);
 const validarTarea = computed(() => {
   if (
     !nuevaTarea.description ||
@@ -51,11 +51,11 @@ onMounted(async () => {
 <template>
   <div>
     <!--imprime nombre del estudiante-->
-    <h1>Nombre del estudiante</h1>
+    <h1></h1>
     <!--inicio de formulario-->
     <select v-model="nuevaTarea.professorId">
-      <option selected disabled>SELECCIONE SU ROL</option>
-        <option v-for="profe in profesores" :key="profe._id" :value="profe._id">
+      <option selected disabled>Seleccione Profesor</option>
+        <option v-for="profe in profesores" :key="profe.username" :value="profe._id">
           {{ profe.name }}
         </option>
     </select>

@@ -14,7 +14,6 @@ const usuario = ref({
 
 const login = async () => {
   const result = await authService.login(usuario.value);
-  console.log(result)
   authStore.saveDatauser(result.token, result.user._id);
   router.push("/");
 };
