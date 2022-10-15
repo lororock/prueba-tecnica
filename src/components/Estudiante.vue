@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { Tarea } from "../dto/tarea.dto";
+import { UserRegisterDto } from "../dto/user-register.dto";
 import { TareaService } from "../services/tarea.services";
+import { UserService } from "../services/user.service";
 import { useAuthStore } from "../store/auth";
 
 const authStore = useAuthStore();
@@ -9,13 +11,15 @@ const authStore = useAuthStore();
 const nuevaTarea = reactive<Tarea>({
   description: "",
   name: "",
-  professorId: "6341c91bbb849ec4de641431",
+  professorId: "",
   solution: "",
-  studentId: "6341b90bfacec9ef21f6b02c",
+  studentId: "",
 });
 
 const http = new TareaService();
+const httpUsers = new UserService()
 
+const profes = ref<UserRegisterDto[]>([]);
 const validarTarea = computed(() => {
   if (
     !nuevaTarea.description ||
@@ -29,26 +33,30 @@ const validarTarea = computed(() => {
 });
 
 const crearTarea = async () => {
-  await http.crearTarea(nuevaTarea, authStore.token || "");
+  await http.crearTarea({...nuevaTarea, studentId: authStore.idUser || ''}, authStore.token || "");
 };
 
 const eliminarTarea = async (idTarea: string) => {
   await http.eliminarTarea(idTarea, authStore.token || "");
 };
+
+onMounted(async () => {
+  authStore.reloadUserData()
+  profes.value = await httpUsers.listarUsuarios(authStore.token || '')
+})
 </script>
 
 <template>
   <div>
     <!--imprime nombre del estudiante-->
     <h1>Nombre del estudiante</h1>
-
     <!--inicio de formulario-->
-    <input
-      v-model="nuevaTarea.professorId"
-      type="text"
-      name=""
-      placeholder="Nombre De Profesor"
-    />
+    <select v-model="nuevaTarea.professorId">
+      <option selected disabled>SELECCIONE SU ROL</option>
+        <option v-for="profe in profes" :key="profe._id" :value="profe._id">
+          {{ profe.name }}
+        </option>
+    </select>
   </div>
   <div>
     <input

@@ -1,5 +1,6 @@
 
 export interface UserRegisterDto {
+    _id: string
     username: string;
     passWord: string;
     name: string;

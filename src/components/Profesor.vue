@@ -1,11 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { TareaService } from "../services/tarea.services";
+
+</script>
 
 <template>
   <!--imprime nombre del profesor-->
   <h1>nombre profesor</h1>
 
   <!--inicio de formulario-->
+
   <form action="">
+    <div>
+      <select name="" id="">
+        <option value=""></option>
+      </select>
+    </div>
     <div><label for="">Calificacion:</label> <input type="number" /></div>
     <p>Observación:</p>
     <div>

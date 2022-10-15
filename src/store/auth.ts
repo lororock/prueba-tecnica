@@ -7,14 +7,15 @@ export const useAuthStore = defineStore('auth', () => {
     const idUser = ref<string | null>('');
 
     const saveDatauser = (newToken: string, iduser: string) => {
-        token.value = JSON.stringify(newToken);
-        idUser.value = JSON.stringify(iduser);
-        localStorage.setItem('token', token.value)
+        token.value = newToken;
+        idUser.value = iduser;
+        localStorage.setItem('token', newToken)
         localStorage.setItem('_id', iduser)
     }
 
     const logoutUser = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('_id')
         token.value = null
     }
 

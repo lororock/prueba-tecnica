@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RolService } from "../services/rol.service";
-import { ref, onMounted, reactive } from "@vue/runtime-core";
+import { ref, onMounted } from "@vue/runtime-core";
 import { AuthService } from "../services/auth.service";
 import { UserRegisterDto } from "../dto/user-register.dto";
 
@@ -9,6 +9,7 @@ const roles = ref<any>([]);
 const tiposDoc = ref<any>([]);
 
 const usuario = ref<UserRegisterDto>({
+  _id: '',
   rol: "SELECCIONE SU ROL",
   name: "",
   email: "",

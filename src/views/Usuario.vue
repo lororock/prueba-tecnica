@@ -27,8 +27,8 @@ onMounted(async () => {
 
 <template>
   <button @click="logout()">Cerrar sesión</button>
-  <estudiante />
-  <profesor />
+  <Estudiante />
+  <Profesor />
 </template>
 
 <style scoped>

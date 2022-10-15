@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 export interface IHttpAdapter {
 
     get<T>(url: string): Promise<T>;
+    getAuth<T>(url: string, config: AxiosRequestConfig): Promise<T>;
     post<T, E>(url: string, data: E): Promise<T>;
     postAuth<T, E>(url: string, data: E, config: AxiosRequestConfig): Promise<T>;
     patch<T, E>(url: string, data: E): Promise<T>;
@@ -16,6 +17,11 @@ export class AxiosAdapter implements IHttpAdapter {
 
     async get<T>(url: string): Promise<T> {
         const { data } = await this.axios.get<T>(url);
+        return data;
+    }
+
+    async getAuth<T, E>(url: string, config: AxiosRequestConfig<any>): Promise<T> {
+        const { data } = await this.axios.get<T>(url, config);
         return data;
     }
 
