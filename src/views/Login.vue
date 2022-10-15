@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, } from "@vue/runtime-core";
+import { ref } from "@vue/runtime-core";
 import router from "../router";
 import { AuthService } from "../services/auth.service";
 import { useAuthStore } from "../store/auth";
@@ -13,9 +13,13 @@ const usuario = ref({
 });
 
 const login = async () => {
-  const result = await authService.login(usuario.value);
-  authStore.saveDatauser(result.token, result.user._id);
-  router.push("/");
+  try {
+    const result = await authService.login(usuario.value);
+    authStore.saveDatauser(result.token, result.user._id);
+    router.push("/");
+  } catch (error) {
+    alert("Usuario o contraseña incorrecta");
+  }
 };
 </script>
 
@@ -47,7 +51,7 @@ const login = async () => {
 
   <!--envía formulario-->
   <div class="card">
-    <button @click="login()">Iniciar sesión</button>
+    <button @click="login">Iniciar sesión</button>
   </div>
 
   <!--redirige al registro-->

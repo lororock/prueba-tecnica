@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from "vue";
 import { Tarea } from "../dto/tarea.dto";
-import { UserRegisterDto } from "../dto/user-register.dto";
 import { TareaService } from "../services/tarea.services";
 import { UserService } from "../services/user.service";
 import { useAuthStore } from "../store/auth";
@@ -17,7 +16,7 @@ const nuevaTarea = reactive<Tarea>({
 });
 
 const http = new TareaService();
-const httpUsers = new UserService()
+const httpUsers = new UserService();
 
 const profes = ref<any[]>([]);
 const validarTarea = computed(() => {
@@ -25,27 +24,33 @@ const validarTarea = computed(() => {
     !nuevaTarea.description ||
     !nuevaTarea.name ||
     !nuevaTarea.professorId ||
-    !nuevaTarea.solution ||
-    !authStore.idUser
+    !nuevaTarea.solution
   )
     return false;
   return true;
 });
 
-const profesores = computed(() => profes.value.filter((profesor) => profesor.rol === '6341b4f9ee0c46a68e80fec0'))
-
 const crearTarea = async () => {
-  await http.crearTarea({...nuevaTarea, studentId: authStore.idUser || ''}, authStore.token || "");
-};
+  try {
+    await http.crearTarea(
+      { ...nuevaTarea, studentId: authStore.idUser || "" },
+      authStore.token || ""
+    );
+    nuevaTarea.description = "";
+    nuevaTarea.name = "";
+    nuevaTarea.professorId = "";
+    nuevaTarea.solution = "";
 
-const eliminarTarea = async (idTarea: string) => {
-  await http.eliminarTarea(idTarea, authStore.token || "");
+    alert("Tarea enviada");
+  } catch (error) {
+    alert("Algo salio mal");
+  }
 };
 
 onMounted(async () => {
-  authStore.reloadUserData()
-  profes.value = await httpUsers.listarUsuarios(authStore.token || '')
-})
+  authStore.reloadUserData();
+  profes.value = await httpUsers.listarUsuarios(authStore.token || "");
+});
 </script>
 
 <template>
@@ -55,9 +60,9 @@ onMounted(async () => {
     <!--inicio de formulario-->
     <select v-model="nuevaTarea.professorId">
       <option selected disabled>Seleccione Profesor</option>
-        <option v-for="profe in profesores" :key="profe.username" :value="profe._id">
-          {{ profe.name }}
-        </option>
+      <option v-for="profe in profes" :key="profe.username" :value="profe._id">
+        {{ profe.name }}
+      </option>
     </select>
   </div>
   <div>

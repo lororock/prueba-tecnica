@@ -6,12 +6,11 @@ import { UserRegisterDto } from "../dto/user-register.dto";
 import router from "../router";
 import { useAuthStore } from "../store/auth";
 
-const authStore = useAuthStore() 
+const authStore = useAuthStore();
 
 const http = new RolService();
 const roles = ref<any>([]);
 const tiposDoc = ref<any>([]);
-
 
 const usuario = ref<UserRegisterDto>({
   rol: "SELECCIONE SU ROL",
@@ -40,10 +39,15 @@ const validarDatosUsuario = () => {
 };
 
 const registro = async () => {
-  const authService = new AuthService();
-  const result = await authService.registrar(usuario.value);
-  authStore.saveDatauser(result.token, result.user._id)
-  router.push("/")
+  try {
+    const authService = new AuthService();
+    const result = await authService.registrar(usuario.value);
+    authStore.saveDatauser(result.token, result._id);
+    router.push("/login");
+    alert("Registro exitoso");
+  } catch (error) {
+    alert("Usuario existente o campos incorrectos");
+  }
 };
 
 onMounted(async () => {
@@ -100,7 +104,7 @@ onMounted(async () => {
 
   <!--envía formulario-->
   <div class="card">
-    <button :disabled="!validarDatosUsuario" @click="registro()">
+    <button :disabled="!validarDatosUsuario" @click="registro">
       Registrarme
     </button>
   </div>

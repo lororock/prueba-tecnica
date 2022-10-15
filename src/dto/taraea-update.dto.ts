@@ -1,4 +1,4 @@
 export interface TareaUpdateDto {
-    calification: number,
-    observations: string
+  calification: number;
+  observations: string;
 }
